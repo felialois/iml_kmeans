@@ -2,23 +2,26 @@ import numpy as np
 import importFile as file
 import math
 from sklearn import metrics
-import utils
-
+#import utils
 
 def fuzzy_c_means(data, cl_labels, max_iterations, epsilon):
     results = []
     silhouette = []
     chs = []
-    data = data[:(len(data) - 1)]
+    fms = []
+    homogeneity = []
+    completeness = []
+
     for c in range(2, 10):
-        membership, centers = execute(d, max_iterations, c, epsilon)
+        membership, centers = execute(data, max_iterations, c, epsilon)
         labels = get_labels(len(data), membership)
         silhouette.append((c, metrics.silhouette_score(data, labels, metric='euclidean')))
         chs.append((c, metrics.calinski_harabaz_score(data, labels)))
 
     results.append(("Silhouette", "Cluster Number", zip(*silhouette)[0], "Silhouette", zip(*silhouette)[1]))
     results.append(("CHS", "Cluster Number", zip(*chs)[0], "CHS", zip(*chs)[1]))
-    utils.plot_results(results)
+
+    print(results)
 
 
 def execute(data, max_iterations, clusters, epsilon):
@@ -113,5 +116,5 @@ def get_labels(rows, membership):
     return labels
 
 
-d = file.read_file("datasets/adult.arff")[:100]
-fuzzy_c_means(d, 100, 0.05)
+d, cl_l = file.read_file("datasets/adult.arff")
+fuzzy_c_means(d[:100], cl_l[:100], 100, 0.05)
