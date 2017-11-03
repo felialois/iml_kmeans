@@ -12,7 +12,7 @@ def read_file(fl):
     data_classes = []
 
     for i in range(0, len(meta.names())):
-        if meta.names()[i] == 'class':
+        if meta.names()[i] == 'class' or meta.names()[i] == 'clase':
             for j in range(0, len(data)):
                 data_classes.append(data[j][i])
         else:
