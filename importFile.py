@@ -22,4 +22,4 @@ def read_file(fl):
                 else:
                     data2[j][i] = values.index(data[j][i])
     return data2
-    # print data2
+    #print data2

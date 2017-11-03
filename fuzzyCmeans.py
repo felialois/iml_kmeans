@@ -76,7 +76,7 @@ def calculate_unity_matrix(data, centroids, membership, fuzzy_constant):
         for k in range(len(centroids)):
             distances = map(distance, data[i], centroids[k])
             for l in range(len(centroids)):
-
+                pass
     return None
 
 
