@@ -1,4 +1,4 @@
-import utils
+from utils import *
 
 def bisecting(data, k):
     # Initially, we have to split all the data
@@ -38,8 +38,8 @@ def bisecting(data, k):
 # This function calculates the score of a clustering
 def score(data, bisect):
     (classif, centroids) = bisect
-    sum = 0
+    sumatory = 0
     for i, d in enumerate(data):
-        sum += distance(d, centroids[classif[i]])
+        sumatory += distance(d, centroids[classif[i]])
     # We calculate the score with the inverse of the mean of the distances
-    score = 1 / (sum / len(data))
+    score = 1 / (sumatory / len(data))
