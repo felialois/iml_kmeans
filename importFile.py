@@ -1,16 +1,14 @@
-import numpy as np
 from scipy.io import arff
+import numpy as np
 
 
-
-def readFile(file):
-
-    data, meta = arff.loadarff(file)
-    #print(meta)
+def read_file(fl):
+    data, meta = arff.loadarff(fl)
+    # print(meta)
     meta.types()
-    #print(meta.names())
+    # print(meta.names())
 
-    data2 = np.zeros(shape = (len(data),len(data[0])))
+    data2 = np.zeros(shape=(len(data), len(data[0])))
 
     for i in range(0, len(meta.names())):
         if meta.types()[i] == 'numeric':
@@ -22,11 +20,6 @@ def readFile(file):
                 if data[j][i] == '?':
                     data2[j][i] = -1
                 else:
-                     data2[j][i] = values.index(data[j][i])
-    #print data2
+                    data2[j][i] = values.index(data[j][i])
     return data2
-
-
-file = "datasets/adult.arff"
-readFile(file)
-
+    # print data2

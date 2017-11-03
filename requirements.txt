@@ -1,2 +1,4 @@
 scipy
 weka
+numpy
+pandas
