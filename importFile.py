@@ -1,12 +1,10 @@
-from scipy.io import arff
-from cStringIO import StringIO
 import numpy as np
-
+from scipy.io import arff
 
 
 
 def readFile(file):
-    file = "datasets/adult.arff"
+
     data, meta = arff.loadarff(file)
     #print(meta)
     meta.types()
@@ -25,8 +23,10 @@ def readFile(file):
                     data2[j][i] = -1
                 else:
                      data2[j][i] = values.index(data[j][i])
-    return data2
     #print data2
+    return data2
 
 
+file = "datasets/adult.arff"
+readFile(file)
 
