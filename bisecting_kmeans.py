@@ -38,6 +38,6 @@ def score(data, bisect):
     (classif, centroids) = bisect
     sum = 0
     for i, d in enumerate(data):
-        sum = distance(d, centroids[classif[i]])
+        sum += distance(d, centroids[classif[i]])
     # We calculate the score with the inverse of the mean of the distances
     score = 1 / (sum / len(data))
