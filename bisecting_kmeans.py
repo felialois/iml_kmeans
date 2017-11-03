@@ -1,3 +1,5 @@
+import utils
+
 def bisecting(data, k):
     # Initially, we have to split all the data
     (classif, centroids) = kmeans(data, 2)
