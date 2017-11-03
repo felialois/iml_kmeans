@@ -1,4 +1,4 @@
-import math
+import cmath
 # This function returns the euclidean distance between the two given points
 def distance(p1, p2):
     sum = 0
