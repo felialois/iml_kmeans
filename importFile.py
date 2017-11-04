@@ -2,7 +2,7 @@ from scipy.io import arff
 import numpy as np
 
 
-def read_file(fl):
+def read_file(fl, class_name):
     data, meta = arff.loadarff(fl)
     # print(meta)
     meta.types()
@@ -12,7 +12,7 @@ def read_file(fl):
     data_classes = []
 
     for i in range(0, len(meta.names())):
-        if meta.names()[i] == 'class' or meta.names()[i] == 'clase':
+        if meta.names()[i] == class_name:
             for j in range(0, len(data)):
                 data_classes.append(data[j][i])
         else:

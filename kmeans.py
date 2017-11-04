@@ -5,8 +5,8 @@ from utils import *
 
 def kmeans(data, k):
     # Randomly choose clusters
-    rng = np.random.RandomState( 2 )
-    i = rng.permutation( data.shape[0] )[:k]
+    rng = np.random.RandomState(2)
+    i = rng.permutation(data.shape[0])[:k]
     centroids = data[i]
     clusters = [None] * len(data)
     new_clusters = [None] * len(data)
@@ -14,12 +14,12 @@ def kmeans(data, k):
     converged = False
     while not converged:
         # Assign clusters based on closest centroid
-        for i, d in enumerate( data ):
-            best_distance = float( "inf" )
+        for i, d in enumerate(data):
+            best_distance = float("inf")
             best_centroid = -1
             # Find new centroids from minimum distance
-            for j, c in enumerate( centroids ):
-                dis_c = distance( d, c )
+            for j, c in enumerate(centroids):
+                dis_c = distance(d, c)
                 if dis_c < best_distance:
                     best_distance = dis_c
                     best_centroid = j
@@ -34,12 +34,11 @@ def kmeans(data, k):
         for i, centroid in enumerate(centroids):
             centroid[:] = [x / cluster_len[i] for x in centroid]
         # Check for convergence
-        if np.array_equal( clusters, new_clusters ):
+        if np.array_equal(clusters, new_clusters):
             converged = True
         clusters = new_clusters
-    return (clusters, centroids)
+    return clusters, centroids
 
-
-(data, classif) = file.read_file("datasets/adult.arff")
-(clusters, centroids) = kmeans(data, 2)
-#print clusters
+# (dt, classif) = file.read_file("datasets/adult.arff")
+# (cl, cen) = kmeans(dt, 2)
+# print clusters

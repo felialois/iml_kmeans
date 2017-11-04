@@ -3,6 +3,7 @@ from utils import *
 from kmeans import kmeans
 from importFile import read_file
 
+
 # This function calculates the score of a clustering
 def mean_distance(data, bisect):
     (clusters, centroids) = bisect
@@ -11,6 +12,7 @@ def mean_distance(data, bisect):
         summation += distance(d, centroids[clusters[i]])
     # We calculate the score with the inverse of the mean of the distances
     return summation / len(data)
+
 
 def bisecting_kmeans(data, k):
     # Initially, we have to split all the data
@@ -43,9 +45,9 @@ def bisecting_kmeans(data, k):
             elif clusters[i] > best_clustering:
                 # We must increment in 1 the number of the cluster because we add 1 cluster
                 clusters[i] += 1
-            # Finally we replace the best cluster with the two generated
+                # Finally we replace the best cluster with the two generated
         new_centroids = []
-        for i,c in enumerate(centroids):
+        for i, c in enumerate(centroids):
             if i == best_clustering:
                 new_centroids.extend(best_class[1])
             else:
@@ -53,9 +55,9 @@ def bisecting_kmeans(data, k):
         centroids = new_centroids
         act_clusters += 1
     # When we have the number of desired clusters we return the classification and the centroids
-    return (clusters, centroids)
+    return clusters, centroids
 
-(data, classif) = read_file("datasets/audiology.arff")
-(clusters, centroids) = bisecting_kmeans(data, 7)
-print clusters
-print centroids
+# (da, classif) = read_file("datasets/audiology.arff")
+# (cl, cen) = bisecting_kmeans(da, 7)
+# print cl
+# print cen
