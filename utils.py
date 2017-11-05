@@ -30,10 +30,11 @@ def get_ssb(centroids):
 
 
 # Plots a set of results
-def plot_results(results):
-    plt.figure(num=None, figsize=(10, 10), dpi=80, facecolor='w', edgecolor='k')
+def plot_results(results, name):
+    plt.figure(num=None, figsize=(15, 10), dpi=80, facecolor='w', edgecolor='k')
+    plt.suptitle(name, fontsize=16)
     for r in results:
         plt.subplot(r[5])
         plt.xlabel(r[0])
-        plt.plot(r[2], r[4])
+        plt.plot(r[2], r[4], color=r[6])
     plt.show()

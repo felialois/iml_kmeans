@@ -8,10 +8,7 @@ import sys
 
 
 def main(algorithm, data, cl_labels, min_k, max_k, max_iterations, epsilon):
-    results = []
-    silhouette = []
-    chs = []
-    ssws, ssbs = [], []
+    results, silhouette, chs, ssws, ssbs, ars, hom, comp = [], [], [], [], [], [], [], []
     membership, centroids, labels = [], [], []
 
     for c in range(min_k, max_k + 1):
@@ -27,14 +24,20 @@ def main(algorithm, data, cl_labels, min_k, max_k, max_iterations, epsilon):
         chs.append((c, metrics.calinski_harabaz_score(data, labels)))
         ssws.append((c, utils.get_ssw(data, centroids, labels)))
         ssbs.append((c, utils.get_ssb(centroids)))
+        ars.append((c, metrics.adjusted_rand_score(cl_labels, labels)))
+        hom.append((c, metrics.homogeneity_score(cl_labels, labels)))
+        comp.append((c, metrics.completeness_score(cl_labels, labels)))
 
-    results.append(("Silhouette", "", zip(*silhouette)[0], "", zip(*silhouette)[1], 221))
-    results.append(("Calinski-Harabaz Index", "", zip(*chs)[0], "", zip(*chs)[1], 222))
-    results.append(("Intra cluster Variance", "", zip(*ssws)[0], "", zip(*ssws)[1], 223))
-    results.append(("Inter cluster Variance", "", zip(*ssbs)[0], "", zip(*ssbs)[1], 224))
+    results.append(("Silhouette", "", zip(*silhouette)[0], "", zip(*silhouette)[1], 333, "blue"))
+    results.append(("Calinski-Harabaz Index", "", zip(*chs)[0], "", zip(*chs)[1], 334, "blue"))
+    results.append(("Intra cluster Variance", "", zip(*ssws)[0], "", zip(*ssws)[1], 331, "blue"))
+    results.append(("Inter cluster Variance", "", zip(*ssbs)[0], "", zip(*ssbs)[1], 332, "blue"))
+    results.append(("Adjusted Rand Index", "", zip(*ars)[0], "", zip(*ars)[1], 335, "orange"))
+    results.append(("Homogeneity", "", zip(*hom)[0], "", zip(*hom)[1], 336, "orange"))
+    results.append(("Completeness", "", zip(*comp)[0], "", zip(*comp)[1], 337, "orange"))
 
     print(labels)
-    utils.plot_results(results)
+    utils.plot_results(results, algorithm)
 
 
 arguments = sys.argv
