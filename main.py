@@ -11,7 +11,7 @@ def main(algorithm, data, cl_labels, min_k, max_k, max_iterations, epsilon):
     results = []
     silhouette = []
     chs = []
-    ssws = []
+    ssws, ssbs = [], []
     membership, centroids, labels = [], [], []
 
     for c in range(min_k, max_k + 1):
@@ -26,10 +26,12 @@ def main(algorithm, data, cl_labels, min_k, max_k, max_iterations, epsilon):
         silhouette.append((c, metrics.silhouette_score(data, labels, metric='euclidean')))
         chs.append((c, metrics.calinski_harabaz_score(data, labels)))
         ssws.append((c, utils.get_ssw(data, centroids, labels)))
+        ssbs.append((c, utils.get_ssb(centroids)))
 
-    results.append(("Silhouette", "Cluster Number", zip(*silhouette)[0], "Silhouette", zip(*silhouette)[1], 221))
-    results.append(("Calinski-Harabaz Index", "Cluster Number", zip(*chs)[0], "CHS", zip(*chs)[1], 222))
-    results.append(("Intra cluster Variance", "Cluster Number", zip(*ssws)[0], "SSW", zip(*ssws)[1], 223))
+    results.append(("Silhouette", "", zip(*silhouette)[0], "", zip(*silhouette)[1], 221))
+    results.append(("Calinski-Harabaz Index", "", zip(*chs)[0], "", zip(*chs)[1], 222))
+    results.append(("Intra cluster Variance", "", zip(*ssws)[0], "", zip(*ssws)[1], 223))
+    results.append(("Inter cluster Variance", "", zip(*ssbs)[0], "", zip(*ssbs)[1], 224))
 
     print(labels)
     utils.plot_results(results)

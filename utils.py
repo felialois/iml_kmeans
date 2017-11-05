@@ -13,18 +13,27 @@ def distance(p1, p2):
 
 # Calculate the SSW
 def get_ssw(data, centroids, labels):
-    ssw = 0
+    ssw = 0.0
     for i in range(len(data)):
         ssw += distance(data[i], centroids[labels[i]])
-    return ssw
+    return ssw / len(centroids)
+
+
+# Calculate the SSB
+def get_ssb(centroids):
+    ssb = 0.0
+    for i in range(len(centroids)):
+        for j in range(len(centroids)):
+            if i != j:
+                ssb += math.pow(distance(centroids[i], centroids[j]),2)
+    return (2 / float(len(centroids) * (len(centroids) - 1))) * ssb
 
 
 # Plots a set of results
 def plot_results(results):
+    plt.figure(num=None, figsize=(10, 10), dpi=80, facecolor='w', edgecolor='k')
     for r in results:
-        plt.title(r[0])
-        plt.xlabel(r[1])
-        plt.ylabel(r[3])
         plt.subplot(r[5])
+        plt.xlabel(r[0])
         plt.plot(r[2], r[4])
     plt.show()
